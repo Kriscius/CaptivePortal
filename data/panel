@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel</title>
+  <style>body { height:100%; background-color:#ebebeb; color:#4f4f4f; font-family:Helvetica, Arial, sans-serif; font-size:90%; margin:0 auto; text-align:center;} #container { width:90%; height:90%; margin:5% 5% 0 5%;} a { text-decoration:none;}</style>
+</head>
+<body>
+<div id="container">
+  <div id="content">
+    <h1>Panel</h1>
+    <form action="./ssid" method="post">
+      <label for="ssid">SSID Name:</label>
+      <input type="text" name="ssid" id="ssid">
+      <input type="submit" value="OK">
+    </form>
+  </div>
+</div>
+</body>
+</html>
